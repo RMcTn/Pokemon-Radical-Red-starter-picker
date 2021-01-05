@@ -1,3 +1,4 @@
+import shutil
 import sys
 starter_pokemon_offsets = [0x169BB5, 0x169DB8, 0x169D82]
 
@@ -19,9 +20,9 @@ try:
 except FileNotFoundError:
     print("starters.txt file not found. Expecting 1-3 lines with pokedex id in each line.")
 
-
-
-with open("./Pokemon Radical Red.gba", "rb+") as rom:
+changed_rom_filename = "Pokemon Radical Red Chose Starters.gba"
+shutil.copy("Pokemon Radical Red.gba", changed_rom_filename)
+with open(changed_rom_filename, "rb+") as rom:
     for i, starter_offset in enumerate(starter_pokemon_offsets):
         starter = starters[i].to_bytes(2, byteorder='little')
         rom.seek(starter_offset)
